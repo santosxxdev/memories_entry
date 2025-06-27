@@ -70,20 +70,28 @@ class SignUpPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      firebaseManager.createAccount(
-                        emailController.text.trim(),
-                        passwordController.text.trim(),
-                        UserModel(
-                          name: nameController.text.trim(),
-                          age: ageController.text.trim(),
-                          phone: phoneController.text.trim(),
-                          email: emailController.text.trim(),
-                        ),
-                      );
-                    }
-                  },
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          await firebaseManager.createAccount(
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                            UserModel(
+                              name: nameController.text.trim(),
+                              age: ageController.text.trim(),
+                              phone: phoneController.text.trim(),
+                              email: emailController.text.trim(),
+                            ),
+                          );
+                          // ✅ بعد التسجيل انقله إلى الصفحة الرئيسية أو صفحة تسجيل الدخول
+                          Navigator.pushReplacementNamed(context, HomePage.routeName);
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('فشل التسجيل: $e')),
+                          );
+                        }
+                      }
+                    },
                   child: const Text("Sign Up"),
                 ),
               ],
