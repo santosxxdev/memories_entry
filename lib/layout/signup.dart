@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:memories_entry/model/user_model.dart';
 import 'package:memories_entry/shared/firebase/firebase_manager.dart';
 
+import 'home.dart';
+
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
 

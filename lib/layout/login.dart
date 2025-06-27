@@ -68,21 +68,22 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-            onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                try {
-                  await firebaseManager.loginAccount(
-                    emailTextController.text.trim(),
-                    passwordTextController.text.trim(),
-                  );
-                  Navigator.pushReplacementNamed(context, 'home'); // أو HomePage.routeName
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('فشل تسجيل الدخول: $e')),
-                  );
-                }
-              }
-            }, child: const Text('Login'),
+                ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          await firebaseManager.loginAccount(
+                            emailTextController.text.trim(),
+                            passwordTextController.text.trim(),
+                          );
+                          Navigator.pushReplacementNamed(context, 'home'); // أو HomePage.routeName
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('فشل تسجيل الدخول: $e')),
+                          );
+                        }
+                      }
+                    }, child: const Text('Login'),
                 ),
               ],
             ),
